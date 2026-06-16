@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,7 @@
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
     background:#e8e3d8;
@@ -23,11 +20,51 @@ body{
 
 .mobile{
     display:none;
+    position:relative;
 }
 
 .mobile img{
     width:100%;
     display:block;
+}
+
+/* MOBILE ACTION BAR */
+
+.mobileActions{
+    display:none;
+}
+
+@media(max-width:900px){
+
+    .desktop{
+        display:none;
+    }
+
+    .mobile{
+        display:block;
+        padding-bottom:70px;
+    }
+
+    .mobileActions{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100%;
+        background:white;
+        z-index:99999;
+        box-shadow:0 -2px 12px rgba(0,0,0,.15);
+    }
+
+    .mobileActions a{
+        flex:1;
+        text-align:center;
+        padding:14px;
+        text-decoration:none;
+        color:#6c4ccf;
+        font-weight:bold;
+    }
+
 }
 
 /* DESKTOP */
@@ -44,13 +81,13 @@ body{
     display:flex;
     gap:4px;
     justify-content:center;
-    align-items:flex-start;
 }
 
 .page{
     width:44vw;
     max-width:700px;
     background:white;
+    position:relative;
     box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
@@ -59,7 +96,57 @@ body{
     display:block;
 }
 
-/* SIDE NAVIGATION */
+/* HOTSPOTS */
+
+.hotspot{
+    position:absolute;
+    z-index:100;
+    display:none;
+    cursor:pointer;
+}
+
+.toc1{left:6%;top:52%;width:65%;height:5%;}
+.toc2{left:6%;top:60%;width:65%;height:5%;}
+.toc3{left:6%;top:69%;width:65%;height:5%;}
+.toc4{left:6%;top:77%;width:65%;height:5%;}
+.toc5{left:6%;top:92%;width:65%;height:5%;}
+
+.assessmentBtn{
+    left:5%;
+    top:80%;
+    width:42%;
+    height:5%;
+}
+
+.websiteBtn{
+    left:5%;
+    top:86%;
+    width:50%;
+    height:5%;
+}
+
+.instagramBtn{
+    left:5%;
+    top:89%;
+    width:23%;
+    height:4%;
+}
+
+.website2Btn{
+    left:35%;
+    top:89%;
+    width:25%;
+    height:4%;
+}
+
+.riskBtn{
+    left:67%;
+    top:89%;
+    width:28%;
+    height:4%;
+}
+
+/* SIDE NAV */
 
 .sideNav{
     position:fixed;
@@ -74,23 +161,10 @@ body{
     font-size:22px;
     cursor:pointer;
     z-index:9999;
-    box-shadow:0 6px 18px rgba(0,0,0,.15);
-    opacity:.9;
-    transition:.2s ease;
 }
 
-.sideNav:hover{
-    opacity:1;
-    transform:translateY(-50%) scale(1.05);
-}
-
-.sidePrev{
-    left:120px;
-}
-
-.sideNext{
-    right:120px;
-}
+.sidePrev{left:120px;}
+.sideNext{right:120px;}
 
 .counter{
     position:fixed;
@@ -100,45 +174,17 @@ body{
     background:white;
     padding:10px 18px;
     border-radius:999px;
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
     color:#6c4ccf;
     font-weight:bold;
 }
 
-/* MOBILE */
-
-@media(max-width:900px){
-
-    .desktop{
-        display:none;
-    }
-
-    .mobile{
-        display:block;
-    }
-
-}
-
-
-.page{position:relative;}
-.hotspot{position:absolute;display:none;z-index:100;}
-.toc1,.toc2,.toc3,.toc4,.toc5{left:6%;width:63%;height:5%;}
-.toc1{top:52%}.toc2{top:60%}.toc3{top:69%}.toc4{top:77%}.toc5{top:86%}
-.assessmentBtn{left:5%;top:80%;width:42%;height:5%;}
-.websiteBtn{left:5%;top:86%;width:50%;height:5%;}
-.instagramBtn{left:5%;top:89%;width:23%;height:4%;}
-.website2Btn{left:35%;top:89%;width:25%;height:4%;}
-.riskBtn{left:67%;top:89%;width:28%;height:4%;}
-
 </style>
 </head>
-
 <body>
 
 <!-- MOBILE -->
 
 <div class="mobile">
-
 <img src="1.png">
 <img src="2.png">
 <img src="3.png">
@@ -147,7 +193,12 @@ body{
 <img src="6.png">
 <img src="7.png">
 <img src="8.png">
+</div>
 
+<div class="mobileActions">
+<a href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319" target="_blank">Assessment</a>
+<a href="https://myfibroidclinic.com/" target="_blank">Website</a>
+<a href="https://www.instagram.com/fibroidclinic" target="_blank">Instagram</a>
 </div>
 
 <!-- DESKTOP -->
@@ -159,21 +210,41 @@ body{
 <div class="book">
 
 <div class="page">
+
 <img id="leftPage" src="1.png">
-<a class="hotspot assessmentBtn" href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319" target="_blank"></a>
-<a class="hotspot websiteBtn" href="https://myfibroidclinic.com/" target="_blank"></a>
+
+<a class="hotspot assessmentBtn"
+href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319"
+target="_blank"></a>
+
+<a class="hotspot websiteBtn"
+href="https://myfibroidclinic.com/"
+target="_blank"></a>
+
 </div>
 
 <div class="page">
+
 <img id="rightPage" src="2.png">
+
 <a class="hotspot toc1" href="#" onclick="goSpread(1);return false;"></a>
 <a class="hotspot toc2" href="#" onclick="goSpread(1);return false;"></a>
 <a class="hotspot toc3" href="#" onclick="goSpread(2);return false;"></a>
 <a class="hotspot toc4" href="#" onclick="goSpread(2);return false;"></a>
 <a class="hotspot toc5" href="#" onclick="goSpread(3);return false;"></a>
-<a class="hotspot instagramBtn" href="https://www.instagram.com/fibroidclinic" target="_blank"></a>
-<a class="hotspot website2Btn" href="https://myfibroidclinic.com/" target="_blank"></a>
-<a class="hotspot riskBtn" href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319" target="_blank"></a>
+
+<a class="hotspot instagramBtn"
+href="https://www.instagram.com/fibroidclinic"
+target="_blank"></a>
+
+<a class="hotspot website2Btn"
+href="https://myfibroidclinic.com/"
+target="_blank"></a>
+
+<a class="hotspot riskBtn"
+href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319"
+target="_blank"></a>
+
 </div>
 
 </div>
@@ -188,75 +259,58 @@ Pages 1 - 2
 
 <script>
 
-const pages = [
-'1.png',
-'2.png',
-'3.png',
-'4.png',
-'5.png',
-'6.png',
-'7.png',
-'8.png'
+const pages=[
+'1.png','2.png','3.png','4.png',
+'5.png','6.png','7.png','8.png'
 ];
 
-let spread = 0;
+let spread=0;
 
-function goSpread(num){spread=num;render();}
-
+function goSpread(num){
+    spread=num;
+    render();
+}
 
 function render(){
 
-    document.getElementById('leftPage').src =
-        pages[spread * 2];
+    leftPage.src=pages[spread*2];
+    rightPage.src=pages[(spread*2)+1];
 
-    document.getElementById('rightPage').src =
-        pages[(spread * 2) + 1];
+    document.querySelectorAll('.hotspot')
+        .forEach(h=>h.style.display='none');
 
-    
-document.querySelectorAll('.hotspot').forEach(h=>h.style.display='none');
-if(spread===0){
-document.querySelectorAll('.toc1,.toc2,.toc3,.toc4,.toc5').forEach(h=>h.style.display='block');
-}
-if(spread===3){
-document.querySelectorAll('.assessmentBtn,.websiteBtn,.instagramBtn,.website2Btn,.riskBtn').forEach(h=>h.style.display='block');
-}
+    if(spread===0){
+        document.querySelectorAll('.toc1,.toc2,.toc3,.toc4,.toc5')
+            .forEach(h=>h.style.display='block');
+    }
 
-document.getElementById('counter').innerText =
-        'Pages ' +
-        ((spread * 2) + 1) +
-        ' - ' +
-        ((spread * 2) + 2);
+    if(spread===3){
+        document.querySelectorAll(
+            '.assessmentBtn,.websiteBtn,.instagramBtn,.website2Btn,.riskBtn'
+        ).forEach(h=>h.style.display='block');
+    }
 
+    counter.innerText=
+        'Pages '+((spread*2)+1)+' - '+((spread*2)+2);
 }
 
 function next(){
-
-    if(spread < 3){
+    if(spread<3){
         spread++;
         render();
     }
-
 }
 
 function prev(){
-
-    if(spread > 0){
+    if(spread>0){
         spread--;
         render();
     }
-
 }
 
-document.addEventListener('keydown', function(e){
-
-    if(e.key === 'ArrowRight'){
-        next();
-    }
-
-    if(e.key === 'ArrowLeft'){
-        prev();
-    }
-
+document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')next();
+    if(e.key==='ArrowLeft')prev();
 });
 
 render();
