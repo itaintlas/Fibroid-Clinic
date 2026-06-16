@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
 body{
     background:#e8e3d8;
     font-family:Arial,sans-serif;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
 /* MOBILE */
@@ -45,6 +46,7 @@ body{
     gap:4px;
     justify-content:center;
     align-items:flex-start;
+    perspective:2000px;
 }
 
 .page{
@@ -52,11 +54,32 @@ body{
     max-width:700px;
     background:white;
     box-shadow:0 10px 25px rgba(0,0,0,.15);
+    transform-style:preserve-3d;
 }
 
 .page img{
     width:100%;
     display:block;
+}
+
+.flip{
+    animation:pageFlip .7s ease;
+}
+
+@keyframes pageFlip{
+
+    0%{
+        transform:rotateY(0deg);
+    }
+
+    50%{
+        transform:rotateY(-90deg);
+    }
+
+    100%{
+        transform:rotateY(0deg);
+    }
+
 }
 
 /* SIDE NAVIGATION */
@@ -81,7 +104,6 @@ body{
 
 .sideNav:hover{
     opacity:1;
-    transform:translateY(-50%) scale(1.05);
 }
 
 .sidePrev{
@@ -92,9 +114,28 @@ body{
     right:120px;
 }
 
+/* PAGE COUNTER */
+
+.counter{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    padding:10px 18px;
+    border-radius:999px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    color:#6c4ccf;
+    font-weight:bold;
+}
+
 /* MOBILE */
 
 @media(max-width:900px){
+
+    body{
+        overflow:auto;
+    }
 
     .desktop{
         display:none;
@@ -108,7 +149,6 @@ body{
 
 </style>
 </head>
-
 <body>
 
 <!-- MOBILE -->
@@ -138,13 +178,17 @@ body{
 <img id="leftPage" src="1.png">
 </div>
 
-<div class="page">
+<div class="page" id="rightWrapper">
 <img id="rightPage" src="2.png">
 </div>
 
 </div>
 
 <button class="sideNav sideNext" onclick="next()">▶</button>
+
+<div class="counter" id="counter">
+Pages 1 - 2
+</div>
 
 </div>
 
@@ -165,41 +209,72 @@ let spread = 0;
 
 function render(){
 
-document.getElementById('leftPage').src =
-pages[spread * 2];
+    document.getElementById('leftPage').src =
+        pages[spread * 2];
 
-document.getElementById('rightPage').src =
-pages[(spread * 2) + 1];
+    document.getElementById('rightPage').src =
+        pages[(spread * 2) + 1];
+
+    document.getElementById('counter').innerText =
+        'Pages ' +
+        ((spread * 2) + 1) +
+        ' - ' +
+        ((spread * 2) + 2);
+
+}
+
+function animateTo(newSpread){
+
+    const rightPage =
+        document.getElementById('rightWrapper');
+
+    rightPage.classList.add('flip');
+
+    setTimeout(()=>{
+
+        spread = newSpread;
+
+        render();
+
+    },350);
+
+    setTimeout(()=>{
+
+        rightPage.classList.remove('flip');
+
+    },700);
 
 }
 
 function next(){
 
-if(spread < 3){
-spread++;
-render();
-}
+    if(spread < 3){
+
+        animateTo(spread + 1);
+
+    }
 
 }
 
 function prev(){
 
-if(spread > 0){
-spread--;
-render();
-}
+    if(spread > 0){
+
+        animateTo(spread - 1);
+
+    }
 
 }
 
-document.addEventListener('keydown', function(e){
+document.addEventListener('keydown',function(e){
 
-if(e.key === 'ArrowRight'){
-next();
-}
+    if(e.key === 'ArrowRight'){
+        next();
+    }
 
-if(e.key === 'ArrowLeft'){
-prev();
-}
+    if(e.key === 'ArrowLeft'){
+        prev();
+    }
 
 });
 
