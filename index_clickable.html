@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibroid Clinic Guide</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#e8e3d8;
+    font-family:Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+/* MOBILE */
+
+.mobile{
+    display:none;
+}
+
+.mobile img{
+    width:100%;
+    display:block;
+}
+
+/* DESKTOP */
+
+.desktop{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.book{
+    display:flex;
+    gap:4px;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.page{
+    width:44vw;
+    max-width:700px;
+    background:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.page img{
+    width:100%;
+    display:block;
+}
+
+/* SIDE NAVIGATION */
+
+.sideNav{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    width:56px;
+    height:56px;
+    border:none;
+    border-radius:50%;
+    background:#6c4ccf;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    z-index:9999;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+    opacity:.9;
+    transition:.2s ease;
+}
+
+.sideNav:hover{
+    opacity:1;
+    transform:translateY(-50%) scale(1.05);
+}
+
+.sidePrev{
+    left:120px;
+}
+
+.sideNext{
+    right:120px;
+}
+
+.counter{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    padding:10px 18px;
+    border-radius:999px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    color:#6c4ccf;
+    font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .desktop{
+        display:none;
+    }
+
+    .mobile{
+        display:block;
+    }
+
+}
+
+
+.page{position:relative;}
+.hotspot{position:absolute;display:none;z-index:100;}
+.toc1,.toc2,.toc3,.toc4,.toc5{left:6%;width:63%;height:5%;}
+.toc1{top:52%}.toc2{top:60%}.toc3{top:69%}.toc4{top:77%}.toc5{top:86%}
+.assessmentBtn{left:5%;top:80%;width:42%;height:5%;}
+.websiteBtn{left:5%;top:86%;width:50%;height:5%;}
+.instagramBtn{left:5%;top:89%;width:23%;height:4%;}
+.website2Btn{left:35%;top:89%;width:25%;height:4%;}
+.riskBtn{left:67%;top:89%;width:28%;height:4%;}
+
+</style>
+</head>
+
+<body>
+
+<!-- MOBILE -->
+
+<div class="mobile">
+
+<img src="1.png">
+<img src="2.png">
+<img src="3.png">
+<img src="4.png">
+<img src="5.png">
+<img src="6.png">
+<img src="7.png">
+<img src="8.png">
+
+</div>
+
+<!-- DESKTOP -->
+
+<div class="desktop">
+
+<button class="sideNav sidePrev" onclick="prev()">◀</button>
+
+<div class="book">
+
+<div class="page">
+<img id="leftPage" src="1.png">
+<a class="hotspot assessmentBtn" href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319" target="_blank"></a>
+<a class="hotspot websiteBtn" href="https://myfibroidclinic.com/" target="_blank"></a>
+</div>
+
+<div class="page">
+<img id="rightPage" src="2.png">
+<a class="hotspot toc1" href="#" onclick="goSpread(1);return false;"></a>
+<a class="hotspot toc2" href="#" onclick="goSpread(1);return false;"></a>
+<a class="hotspot toc3" href="#" onclick="goSpread(2);return false;"></a>
+<a class="hotspot toc4" href="#" onclick="goSpread(2);return false;"></a>
+<a class="hotspot toc5" href="#" onclick="goSpread(3);return false;"></a>
+<a class="hotspot instagramBtn" href="https://www.instagram.com/fibroidclinic" target="_blank"></a>
+<a class="hotspot website2Btn" href="https://myfibroidclinic.com/" target="_blank"></a>
+<a class="hotspot riskBtn" href="https://app.patientreach360.com/example_sites/4ac49b63-c7d5-4cc9-b344-f1153234b319" target="_blank"></a>
+</div>
+
+</div>
+
+<button class="sideNav sideNext" onclick="next()">▶</button>
+
+<div class="counter" id="counter">
+Pages 1 - 2
+</div>
+
+</div>
+
+<script>
+
+const pages = [
+'1.png',
+'2.png',
+'3.png',
+'4.png',
+'5.png',
+'6.png',
+'7.png',
+'8.png'
+];
+
+let spread = 0;
+
+function goSpread(num){spread=num;render();}
+
+
+function render(){
+
+    document.getElementById('leftPage').src =
+        pages[spread * 2];
+
+    document.getElementById('rightPage').src =
+        pages[(spread * 2) + 1];
+
+    
+document.querySelectorAll('.hotspot').forEach(h=>h.style.display='none');
+if(spread===0){
+document.querySelectorAll('.toc1,.toc2,.toc3,.toc4,.toc5').forEach(h=>h.style.display='block');
+}
+if(spread===3){
+document.querySelectorAll('.assessmentBtn,.websiteBtn,.instagramBtn,.website2Btn,.riskBtn').forEach(h=>h.style.display='block');
+}
+
+document.getElementById('counter').innerText =
+        'Pages ' +
+        ((spread * 2) + 1) +
+        ' - ' +
+        ((spread * 2) + 2);
+
+}
+
+function next(){
+
+    if(spread < 3){
+        spread++;
+        render();
+    }
+
+}
+
+function prev(){
+
+    if(spread > 0){
+        spread--;
+        render();
+    }
+
+}
+
+document.addEventListener('keydown', function(e){
+
+    if(e.key === 'ArrowRight'){
+        next();
+    }
+
+    if(e.key === 'ArrowLeft'){
+        prev();
+    }
+
+});
+
+render();
+
+</script>
+
+</body>
+</html>
