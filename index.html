@@ -1,0 +1,189 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibroid Clinic Guide</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#e8e3d8;
+    font-family:Arial,sans-serif;
+}
+
+/* MOBILE */
+
+.mobile{
+    display:none;
+}
+
+.mobile img{
+    width:100%;
+    display:block;
+}
+
+/* DESKTOP BOOKLET */
+
+.desktop{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.book{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.page{
+    width:42vw;
+    max-width:650px;
+    background:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.page img{
+    width:100%;
+    display:block;
+}
+
+.controls{
+    margin-top:25px;
+    display:flex;
+    gap:20px;
+}
+
+.controls button{
+    border:none;
+    background:#6c4ccf;
+    color:white;
+    padding:14px 24px;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.controls button:hover{
+    opacity:.9;
+}
+
+@media(max-width:900px){
+
+    .desktop{
+        display:none;
+    }
+
+    .mobile{
+        display:block;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- MOBILE -->
+
+<div class="mobile">
+    <img src="1.png">
+    <img src="2.png">
+    <img src="3.png">
+    <img src="4.png">
+    <img src="5.png">
+    <img src="6.png">
+    <img src="7.png">
+    <img src="8.png">
+</div>
+
+<!-- DESKTOP -->
+
+<div class="desktop">
+
+    <div class="book">
+
+        <div class="page">
+            <img id="leftPage" src="1.png">
+        </div>
+
+        <div class="page">
+            <img id="rightPage" src="2.png">
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button onclick="prev()">◀ Previous</button>
+        <button onclick="next()">Next ▶</button>
+    </div>
+
+</div>
+
+<script>
+
+const pages = [
+'1.png',
+'2.png',
+'3.png',
+'4.png',
+'5.png',
+'6.png',
+'7.png',
+'8.png'
+];
+
+let spread = 0;
+
+function render(){
+
+    document.getElementById('leftPage').src =
+        pages[spread * 2];
+
+    document.getElementById('rightPage').src =
+        pages[(spread * 2) + 1];
+
+}
+
+function next(){
+
+    if(spread < 3){
+
+        spread++;
+
+        render();
+
+    }
+
+}
+
+function prev(){
+
+    if(spread > 0){
+
+        spread--;
+
+        render();
+
+    }
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>
+```
